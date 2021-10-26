@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
 
-    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="leaflet-sidebar.js"></script>
     <!-- <script src="https://raw.github.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script> -->
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <!--[if lte IE 8]><link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
 
     <link rel="stylesheet" href="leaflet-sidebar.css" />
@@ -300,7 +300,7 @@
                 <li><a href="#messages" role="tab"><i class="fa fa-bars"></i></a></li>
                 <li><a href="#home" role="tab"><i class="fa fa-info"></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-search"></i></a></li>
-                
+
                 <li><a href="#settings" role="tab" target="_blank"><i class="fa fa-gear"></i></a></li>
             </ul>
 
@@ -317,7 +317,8 @@
                     <span class="sidebar-close"><i class="fa fa-times"></i></span>
                 </h1>
 
-                <p style="margin-top: 1em; font-size: 1.6em; text-align: center;"><strong>Selecciona qualsevol barri per veure'n la informació.</strong></p>
+                <p style="margin-top: 1em; font-size: 1.6em; text-align: center;"><strong>Selecciona qualsevol barri per
+                        veure'n la informació.</strong></p>
 
             </div>
 
@@ -342,7 +343,7 @@
                     <option value="Domestica">Violència domèstica</option>
                     <option value="Conv_veins">Convivència veïnal</option>
                     <option value="Baralles">Baralles</option>
-                    <option value="Psicotrop">Psicotròpics</option>
+                    <option value="Psicotrop">Psicotròpics / Drogues</option>
                     <option value="Alarmes">Alarmes</option>
                     <option value="Proteccio">Protecció</option>
                     <option value="Atemptats_">Atemptats</option>
@@ -447,6 +448,7 @@
             });
 
             //creem llegendes
+
             var legend = L.control({ position: 'bottomright' });
 
             legend.onAdd = function (map) {
@@ -470,10 +472,10 @@
             legendAccidents.onAdd = function (map) {
 
                 var div = L.DomUtil.create('div', 'info legend'),
-                    grades = [0,  50,  100, 250, 500, 1500],
+                    grades = [0, 50, 100, 250, 500, 1500],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Accidents</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorAccidents(grades[i] + 1) + '"></i> ' +
@@ -491,7 +493,7 @@
                     grades = [0, 10, 25, 50, 100, 250],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Agressions</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorAgressions(grades[i] + 1) + '"></i> ' +
@@ -509,7 +511,7 @@
                     grades = [0, 5, 10, 20, 50, 100],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Violència domèstica</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorDomestica(grades[i] + 1) + '"></i> ' +
@@ -527,7 +529,7 @@
                     grades = [0, 50, 100, 250, 500, 1500],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Convivència veïns</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorConvi(grades[i] + 1) + '"></i> ' +
@@ -545,7 +547,7 @@
                     grades = [0, 5, 10, 50, 100, 250],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Baralles</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorBaralles(grades[i] + 1) + '"></i> ' +
@@ -563,7 +565,7 @@
                     grades = [0, 25, 50, 100, 250, 500],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Psicotròpics / Drogues</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorPsico(grades[i] + 1) + '"></i> ' +
@@ -581,7 +583,7 @@
                     grades = [0, 5, 10, 25, 50, 100],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Alarmes</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorAlarmes(grades[i] + 1) + '"></i> ' +
@@ -599,7 +601,7 @@
                     grades = [0, 50, 100, 250, 500, 1500],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Protecció</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorProtect(grades[i] + 1) + '"></i> ' +
@@ -617,7 +619,7 @@
                     grades = [0, 2, 5, 10, 20, 40],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Atemptats</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorAtempt(grades[i] + 1) + '"></i> ' +
@@ -635,7 +637,7 @@
                     grades = [0, 10, 25, 50, 100, 200],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Avaries Serveis Municipals</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorAvariesSM(grades[i] + 1) + '"></i> ' +
@@ -653,7 +655,7 @@
                     grades = [0, 5, 10, 25, 50, 100],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Avaries Serveis Públics</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorAvariesSP(grades[i] + 1) + '"></i> ' +
@@ -671,7 +673,7 @@
                     grades = [0, 5, 10, 25, 50, 100],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Conflictes</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorConflictes(grades[i] + 1) + '"></i> ' +
@@ -689,7 +691,7 @@
                     grades = [0, 1, 3, 5, 10, 15],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Llibertat sexual</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorLlibertat(grades[i] + 1) + '"></i> ' +
@@ -707,7 +709,7 @@
                     grades = [0, 10, 25, 50, 100, 200],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Incendis</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorIncendis(grades[i] + 1) + '"></i> ' +
@@ -725,7 +727,7 @@
                     grades = [0, 25, 50, 100, 250, 1000],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Infraccions de trànsit</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorInfraccions(grades[i] + 1) + '"></i> ' +
@@ -743,7 +745,7 @@
                     grades = [0, 25, 50, 100, 200, 500],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Estacionament</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorEstaciona(grades[i] + 1) + '"></i> ' +
@@ -761,7 +763,7 @@
                     grades = [0, 10, 25, 50, 100, 200],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Inspeccions</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorInspeccions(grades[i] + 1) + '"></i> ' +
@@ -779,7 +781,7 @@
                     grades = [0, 20, 50, 100, 200, 300],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Manifestacions</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorManifesta(grades[i] + 1) + '"></i> ' +
@@ -797,7 +799,7 @@
                     grades = [0, 2, 5, 10, 20, 40],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Obres</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorObressum(grades[i] + 1) + '"></i> ' +
@@ -815,7 +817,7 @@
                     grades = [0, 2, 5, 10, 20, 40],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Ocupacions</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorOcupa(grades[i] + 1) + '"></i> ' +
@@ -833,7 +835,7 @@
                     grades = [0, 5, 10, 25, 50, 100],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Restriccions</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorRestriccions(grades[i] + 1) + '"></i> ' +
@@ -851,7 +853,7 @@
                     grades = [0, 2, 10, 25, 50, 75],
                     labels = [];
 
-                // loop through our density intervals and generate a label with a colored square for each interval
+                div.innerHTML += "<p>Vandalisme</p>"
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
                         '<i style="background:' + getColorVandalisme(grades[i] + 1) + '"></i> ' +
@@ -862,6 +864,7 @@
             };
 
             //Obrim la secció d'informació de la sidebar 
+
             var sidebarDiv = document.getElementById('sidebar');
 
 
@@ -882,9 +885,6 @@
             neteja = function () {
                 mymap.clearLayers();
                 Topo.addTo(mymap);
-                
-
-
             }
 
             neteja2 = function () {
@@ -892,18 +892,48 @@
                 Topo.addTo(mymap);
                 kyIncidents.addTo(mymap);
                 mymap.removeControl(currentLegend);
-
             }
+
+            netejaEstil = function () {
+                document.getElementById("agressions").style.backgroundColor = "#fff";
+                document.getElementById("baralles").style.backgroundColor = "#fff";
+                document.getElementById("accidents").style.backgroundColor = "#fff";
+                document.getElementById("violencia").style.backgroundColor = "#fff";
+                document.getElementById("convi").style.backgroundColor = "#fff";
+                document.getElementById("psico").style.backgroundColor = "#fff";
+                document.getElementById("alarmes").style.backgroundColor = "#fff";
+                document.getElementById("proteccio").style.backgroundColor = "#fff";
+                document.getElementById("atemptats").style.backgroundColor = "#fff";
+                document.getElementById("avariesSM").style.backgroundColor = "#fff";
+                document.getElementById("avariesSP").style.backgroundColor = "#fff";
+                document.getElementById("conflictes").style.backgroundColor = "#fff";
+                document.getElementById("llibertat").style.backgroundColor = "#fff";
+                document.getElementById("incendis").style.backgroundColor = "#fff";
+                document.getElementById("infraccions").style.backgroundColor = "#fff";
+                document.getElementById("estaciona").style.backgroundColor = "#fff";
+                document.getElementById("inspeccions").style.backgroundColor = "#fff";
+                document.getElementById("manifestacions").style.backgroundColor = "#fff";
+                document.getElementById("obres").style.backgroundColor = "#fff";
+                document.getElementById("ocupacions").style.backgroundColor = "#fff";
+                document.getElementById("vandalisme").style.backgroundColor = "#fff";
+                document.getElementById("restriccions").style.backgroundColor = "#fff";
+            }
+
             legend.addTo(mymap);
             var currentLegend = legend;
+            var currentStyle;
 
             //Carreguem la capa al iniciar el mapa
+
             kyIncidents = L.geoJSON(incidents.responseJSON, {
                 onEachFeature: onEachFeature,
                 style: style,
             }).addTo(mymap);
 
+
+
             //Tematitzem el mapa en funcio del tipus d'incidència seleccionada
+
             $("select.tipus").change(function () {
                 selectedTipus = $(this).children("option:selected").val();
 
@@ -920,7 +950,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAgressions;
                     legendAgressions.addTo(mymap);
-                    
+                    netejaEstil();
+                    document.getElementById("agressions").style.backgroundColor = "yellow";
+                    currentStyle = "agressions";
                 }
                 else if (selectedTipus == "Baralles") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -932,6 +964,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendBaralles;
                     legendBaralles.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("baralles").style.backgroundColor = "yellow";
+                    currentStyle = "baralles";
                 }
                 else if (selectedTipus == "Accidents") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -943,6 +978,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAccidents;
                     legendAccidents.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("accidents").style.backgroundColor = "yellow";
+                    currentStyle = "accidents";
                 }
                 else if (selectedTipus == "Domestica") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -954,6 +992,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendViolencia;
                     legendViolencia.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("violencia").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Conv_veins") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -965,6 +1006,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConvi;
                     legendConvi.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("convi").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Psicotrop") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -976,6 +1020,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendPsico;
                     legendPsico.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("psico").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Alarmes") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -987,6 +1034,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAlarmes;
                     legendAlarmes.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("alarmes").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Proteccio") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -998,6 +1048,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendProteccio;
                     legendProteccio.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("proteccio").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Atemptats_") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1009,6 +1062,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAtemptats;
                     legendAtemptats.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("atemptats").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Avaries_SM") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1020,6 +1076,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSM;
                     legendAvariesSM.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("avariesSM").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Avaries_SP") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1031,6 +1090,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSP;
                     legendAvariesSP.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("avariesSP").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Conflictes") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1042,6 +1104,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConflictes;
                     legendConflictes.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("conflictes").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Llibertat") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1053,6 +1118,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendLlibertat;
                     legendLlibertat.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("llibertat").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Incendis_s") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1064,6 +1132,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendIncendis;
                     legendIncendis.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("incendis").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Infraccion") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1075,6 +1146,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInfraccions;
                     legendInfraccions.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("infraccions").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Estacionam") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1086,6 +1160,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendEstaciona;
                     legendEstaciona.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("estaciona").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Inspeccion") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1097,6 +1174,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInspeccions;
                     legendInspeccions.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("inspeccions").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Manifestac") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1108,6 +1188,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendManifestacions;
                     legendManifestacions.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("manifestacions").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Obres_sum") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1119,6 +1202,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendObres;
                     legendObres.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("obres").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Ocupacions") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1130,6 +1216,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendOcupa;
                     legendOcupa.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("ocupacions").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Restriccio") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1141,6 +1230,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendRestriccions;
                     legendRestriccions.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("restriccions").style.backgroundColor = "yellow";
+
                 }
                 else if (selectedTipus == "Vandalisme") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1152,247 +1244,255 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendVandalisme;
                     legendVandalisme.addTo(mymap);
+                    netejaEstil();
+                    document.getElementById("vandalisme").style.backgroundColor = "yellow";
+
                 }
             });
         });
 
+
+
         //Paletes de colors
+
         function getColor(d) {
             return d > 1500 ? '#000a1a' :
-                d > 500 ? '#042354' :                  
-                        d > 250 ? '#275e8e' :                           
-                                d > 100 ? '#6f94b3' :                                    
-                                        d > 50 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 500 ? '#042354' :
+                    d > 250 ? '#275e8e' :
+                        d > 100 ? '#6f94b3' :
+                            d > 50 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorAccidents(d) {
             return d > 1500 ? '#000a1a' :
-                d > 500 ? '#042354' :                  
-                        d > 250 ? '#275e8e' :                           
-                                d > 100 ? '#6f94b3' :                                    
-                                        d > 50 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 500 ? '#042354' :
+                    d > 250 ? '#275e8e' :
+                        d > 100 ? '#6f94b3' :
+                            d > 50 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorAgressions(d) {
             return d > 250 ? '#000a1a' :
-                d > 100 ? '#042354' :                  
-                        d > 50 ? '#275e8e' :                           
-                                d > 25 ? '#6f94b3' :                                    
-                                        d > 10 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 100 ? '#042354' :
+                    d > 50 ? '#275e8e' :
+                        d > 25 ? '#6f94b3' :
+                            d > 10 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorBaralles(d) {
             return d > 250 ? '#000a1a' :
-                d > 100 ? '#042354' :                  
-                        d > 50 ? '#275e8e' :                           
-                                d > 10 ? '#6f94b3' :                                    
-                                        d > 5 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 100 ? '#042354' :
+                    d > 50 ? '#275e8e' :
+                        d > 10 ? '#6f94b3' :
+                            d > 5 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorConvi(d) {
             return d > 1500 ? '#000a1a' :
-                d > 500 ? '#042354' :                  
-                        d > 250 ? '#275e8e' :                           
-                                d > 100 ? '#6f94b3' :                                    
-                                        d > 50 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 500 ? '#042354' :
+                    d > 250 ? '#275e8e' :
+                        d > 100 ? '#6f94b3' :
+                            d > 50 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorDomestica(d) {
             return d > 100 ? '#000a1a' :
-                d > 50 ? '#042354' :                  
-                        d > 20 ? '#275e8e' :                           
-                                d > 10 ? '#6f94b3' :                                    
-                                        d > 5 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 50 ? '#042354' :
+                    d > 20 ? '#275e8e' :
+                        d > 10 ? '#6f94b3' :
+                            d > 5 ? '#b7c9d9' :
+                                '#ffffff';
         }
+
         function getColorPsico(d) {
             return d > 500 ? '#000a1a' :
-                d > 250 ? '#042354' :                  
-                        d > 100 ? '#275e8e' :                           
-                                d > 50 ? '#6f94b3' :                                    
-                                        d > 25 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 250 ? '#042354' :
+                    d > 100 ? '#275e8e' :
+                        d > 50 ? '#6f94b3' :
+                            d > 25 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorAlarmes(d) {
             return d > 100 ? '#000a1a' :
-                d > 50 ? '#042354' :                  
-                        d > 25 ? '#275e8e' :                           
-                                d > 10 ? '#6f94b3' :                                    
-                                        d > 5 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 50 ? '#042354' :
+                    d > 25 ? '#275e8e' :
+                        d > 10 ? '#6f94b3' :
+                            d > 5 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorProtect(d) {
             return d > 1500 ? '#000a1a' :
-                d > 500 ? '#042354' :                  
-                        d > 250 ? '#275e8e' :                           
-                                d > 100 ? '#6f94b3' :                                    
-                                        d > 50 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 500 ? '#042354' :
+                    d > 250 ? '#275e8e' :
+                        d > 100 ? '#6f94b3' :
+                            d > 50 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorAtempt(d) {
             return d > 40 ? '#000a1a' :
-                d > 20 ? '#042354' :                  
-                        d > 10 ? '#275e8e' :                           
-                                d > 5 ? '#6f94b3' :                                    
-                                        d > 2 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 20 ? '#042354' :
+                    d > 10 ? '#275e8e' :
+                        d > 5 ? '#6f94b3' :
+                            d > 2 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorAvariesSM(d) {
             return d > 200 ? '#000a1a' :
-                d > 100 ? '#042354' :                  
-                        d > 50 ? '#275e8e' :                           
-                                d > 25 ? '#6f94b3' :                                    
-                                        d > 10 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 100 ? '#042354' :
+                    d > 50 ? '#275e8e' :
+                        d > 25 ? '#6f94b3' :
+                            d > 10 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorAvariesSP(d) {
             return d > 100 ? '#000a1a' :
-                d > 50 ? '#042354' :                  
-                        d > 25 ? '#275e8e' :                           
-                                d > 10 ? '#6f94b3' :                                    
-                                        d > 5 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 50 ? '#042354' :
+                    d > 25 ? '#275e8e' :
+                        d > 10 ? '#6f94b3' :
+                            d > 5 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorConflictes(d) {
             return d > 100 ? '#000a1a' :
-                d > 50 ? '#042354' :                  
-                        d > 25 ? '#275e8e' :                           
-                                d > 10 ? '#6f94b3' :                                    
-                                        d > 5 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 50 ? '#042354' :
+                    d > 25 ? '#275e8e' :
+                        d > 10 ? '#6f94b3' :
+                            d > 5 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorLlibertat(d) {
             return d > 15 ? '#000a1a' :
-                d > 10 ? '#042354' :                  
-                        d > 5 ? '#275e8e' :                           
-                                d > 3 ? '#6f94b3' :                                    
-                                        d > 1 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 10 ? '#042354' :
+                    d > 5 ? '#275e8e' :
+                        d > 3 ? '#6f94b3' :
+                            d > 1 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorIncendis(d) {
             return d > 200 ? '#000a1a' :
-                d > 100 ? '#042354' :                  
-                        d > 50 ? '#275e8e' :                           
-                                d > 25 ? '#6f94b3' :                                    
-                                        d > 10 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 100 ? '#042354' :
+                    d > 50 ? '#275e8e' :
+                        d > 25 ? '#6f94b3' :
+                            d > 10 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorInfraccions(d) {
-           return d > 1000 ? '#000a1a' :
-                d > 250 ? '#042354' :                  
-                        d > 100 ? '#275e8e' :                           
-                                d > 50 ? '#6f94b3' :                                    
-                                        d > 25 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+            return d > 1000 ? '#000a1a' :
+                d > 250 ? '#042354' :
+                    d > 100 ? '#275e8e' :
+                        d > 50 ? '#6f94b3' :
+                            d > 25 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorEstaciona(d) {
-          return d > 500 ? '#000a1a' :
-                d > 200 ? '#042354' :                  
-                        d > 100 ? '#275e8e' :                           
-                                d > 50 ? '#6f94b3' :                                    
-                                        d > 25 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+            return d > 500 ? '#000a1a' :
+                d > 200 ? '#042354' :
+                    d > 100 ? '#275e8e' :
+                        d > 50 ? '#6f94b3' :
+                            d > 25 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorInspeccions(d) {
-           return d > 200 ? '#000a1a' :
-                d > 100 ? '#042354' :                  
-                        d > 50 ? '#275e8e' :                           
-                                d > 25 ? '#6f94b3' :                                    
-                                        d > 10 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+            return d > 200 ? '#000a1a' :
+                d > 100 ? '#042354' :
+                    d > 50 ? '#275e8e' :
+                        d > 25 ? '#6f94b3' :
+                            d > 10 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorManifesta(d) {
             return d > 300 ? '#000a1a' :
-                d > 200 ? '#042354' :                  
-                        d > 100 ? '#275e8e' :                           
-                                d > 50 ? '#6f94b3' :                                    
-                                        d > 20 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 200 ? '#042354' :
+                    d > 100 ? '#275e8e' :
+                        d > 50 ? '#6f94b3' :
+                            d > 20 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorObressum(d) {
-           return d > 40 ? '#000a1a' :
-                d > 20 ? '#042354' :                  
-                        d > 10 ? '#275e8e' :                           
-                                d > 5 ? '#6f94b3' :                                    
-                                        d > 2 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+            return d > 40 ? '#000a1a' :
+                d > 20 ? '#042354' :
+                    d > 10 ? '#275e8e' :
+                        d > 5 ? '#6f94b3' :
+                            d > 2 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorOcupa(d) {
             return d > 40 ? '#000a1a' :
-                d > 20 ? '#042354' :                  
-                        d > 10 ? '#275e8e' :                           
-                                d > 5 ? '#6f94b3' :                                    
-                                        d > 2 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 20 ? '#042354' :
+                    d > 10 ? '#275e8e' :
+                        d > 5 ? '#6f94b3' :
+                            d > 2 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorRestriccions(d) {
             return d > 100 ? '#000a1a' :
-                d > 50 ? '#042354' :                  
-                        d > 25 ? '#275e8e' :                           
-                                d > 10 ? '#6f94b3' :                                    
-                                        d > 5 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+                d > 50 ? '#042354' :
+                    d > 25 ? '#275e8e' :
+                        d > 10 ? '#6f94b3' :
+                            d > 5 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         function getColorVandalisme(d) {
-           return d > 75 ? '#000a1a' :
-                d > 50 ? '#042354' :                  
-                        d > 25 ? '#275e8e' :                           
-                                d > 10 ? '#6f94b3' :                                    
-                                        d > 2 ? '#b7c9d9' :                                            
-                                              '#ffffff';
+            return d > 75 ? '#000a1a' :
+                d > 50 ? '#042354' :
+                    d > 25 ? '#275e8e' :
+                        d > 10 ? '#6f94b3' :
+                            d > 2 ? '#b7c9d9' :
+                                '#ffffff';
         }
 
         //Estils en base al tipus d'incidència
+
         function style(feature) {
             return {
-                weight: 2,
-                opacity: 0.1,
+                weight: 1,
+                opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.25,
+                fillOpacity: 0.75,
                 fillColor: '#ebeff5'
             };
         }
 
         function styleAccidents(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorAccidents(feature.properties.Accidents)
             };
         }
 
         function styleBaralles(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorBaralles(feature.properties.Baralles)
 
             };
@@ -1400,11 +1500,11 @@
 
         function styleAgresions(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorAgressions(feature.properties.Agresions)
 
             };
@@ -1412,318 +1512,373 @@
 
         function styleDomestica(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorDomestica(feature.properties.Domestica)
 
             };
         }
         function styleConvi(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorConvi(feature.properties.Conv_veins)
 
             };
         }
         function stylePsico(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorPsico(feature.properties.Psicotrop)
 
             };
         }
         function styleAlarmes(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorAlarmes(feature.properties.Alarmes)
 
             };
         }
         function styleProtect(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorProtect(feature.properties.Proteccio)
 
             };
         }
         function styleAtempt(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorAtempt(feature.properties.Atemptats_)
 
             };
         }
         function styleAvariesSM(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorAvariesSM(feature.properties.Avaries_SM)
 
             };
         }
         function styleAvariesSP(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorAvariesSP(feature.properties.Avaries_SP)
 
             };
         }
         function styleConflictes(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorConflictes(feature.properties.Conflictes)
 
             };
         }
         function styleLlibertat(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorLlibertat(feature.properties.Llibertat)
 
             };
         }
         function styleIncendis(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorIncendis(feature.properties.Incendis_s)
 
             };
         }
         function styleInfraccions(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorInfraccions(feature.properties.Infraccion)
 
             };
         }
         function styleEstacionam(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorEstaciona(feature.properties.Estacionam)
 
             };
         }
         function styleInspeccion(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorInspeccions(feature.properties.Inspeccion)
 
             };
         }
         function styleManis(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorManifesta(feature.properties.Manifestac)
 
             };
         }
         function styleObres(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorObressum(feature.properties.Obres_sum)
 
             };
         }
         function styleOcupa(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorOcupa(feature.properties.Ocupacions)
 
             };
         }
         function styleRestrict(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorRestriccions(feature.properties.Restriccio)
 
             };
         }
         function styleVandals(feature) {
             return {
-                weight: 0.75,
+                weight: 1,
                 opacity: 1,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.9,
+                fillOpacity: 0.75,
                 fillColor: getColorVandalisme(feature.properties.Vandalisme)
 
             };
         }
 
+        //ressaltem el contorn dels poligons al fer hover
+        function highlightFeature(e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 3,
+                color: 'yellow',
+                dashArray: '',
+                fillOpacity: 0.65
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+        }
+
+        //restablim el contorn al fer mouseout
+        function resetHighlight(e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 1,
+                opacity: 1,
+                color: 'black',
+                dashArray: '',
+                fillOpacity: 0.75,
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+       }
+
+       function highlightFeature2(e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 3,
+                color: 'orange',
+                dashArray: '',
+                fillOpacity: 0.65
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+        }
+
+
+
         //Omplim el contingut de la sidebar al clicar sobre qualsevol dels barris
 
         function onEachFeature(feature, layer) {
+            
             layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM);
 
-            layer.on('click', function (e) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: highlightFeature2,   
+            });
 
+
+            layer.on('click', function (e) {
+                
                 toggleSidebar();
 
 
-                $('#home').html(`<h1 class="sidebar-header" style="text-align:center; margin-bottom: 0.3em">
-                    ${feature.properties.NOM}
-                    
-                </h1>
-                <table class="table table-hover" >
+                $('#home').html(`<h1 class="sidebar-header" style="text-align:center; margin-bottom: 0.3em">${feature.properties.NOM}</h1>
+
+                <table class="table table-hover" id="llista" >
                     <tr>
                        <p class="titolet">Intervencions Guàrdia Urbana (any 2020)<p> 
                     </tr>
-                    <tr>
+                    <tr id="accidents">
                        <th>Accidents : </th>
                         <td>   <strong> ${feature.properties.Accidents} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="agressions">
                        <th>Agressions : </th>
                         <td>   <strong> ${feature.properties.Agresions} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="violencia">
                        <th>Violència domèstica : </th>
                         <td>   <strong> ${feature.properties.Domestica} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="convi">
                        <th>Convivència veïnal : </th>
                         <td>   <strong> ${feature.properties.Conv_veins} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="baralles">
                        <th>Baralles : </th>
                         <td>   <strong> ${feature.properties.Baralles} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="psico">
                        <th>Psicotròpics / Drogues : </th>
                         <td>   <strong> ${feature.properties.Psicotrop} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="alarmes">
                        <th>Alarmes : </th>
                         <td>   <strong> ${feature.properties.Alarmes} </strong> </td>
                     </tr>
-                  
+                    <tr id="proteccio">
                        <th>Protecció : </th>
                         <td>   <strong> ${feature.properties.Proteccio} </strong> </td>
-                    </tr>
-                   
-                    <tr>
+                    </tr>                  
+                    <tr id="atemptats">
                        <th>Atemptats : </th>
                         <td>   <strong> ${feature.properties.Atemptats_} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="avariesSM">
                        <th>Avaries serveis municipals : </th>
                         <td>   <strong> ${feature.properties.Avaries_SM} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="avariesSP">
                        <th>Avaries serveis públics : </th>
                         <td>   <strong> ${feature.properties.Avaries_SP} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="conflictes">
                        <th>Conflictes : </th>
                         <td>   <strong> ${feature.properties.Conflictes} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="llibertat">
                        <th>Llibertat sexual : </th>
                         <td>   <strong> ${feature.properties.Llibertat} </strong> </td>
                     </tr>                                                         
-                    <tr>
+                    <tr id="incendis">
                        <th>Incendis : </th>
                         <td>   <strong> ${feature.properties.Incendis_s} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="infraccions">
                        <th>Infraccions de trànsit: </th>
                         <td>   <strong> ${feature.properties.Infraccion} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="estaciona">
                        <th>Estacionament : </th>
                         <td>   <strong> ${feature.properties.Estacionam} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="inspeccions">
                        <th>Inspeccions : </th>
                         <td>   <strong> ${feature.properties.Inspeccion} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="manifestacions">
                        <th>Manifestacions : </th>
                         <td>   <strong> ${feature.properties.Manifestac} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="obres">
                        <th>Obres : </th>
                         <td>   <strong> ${feature.properties.Obres_sum} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="ocupacions">
                        <th>Ocupacions : </th>
                         <td>   <strong> ${feature.properties.Ocupacions} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="restriccions">
                        <th>Restriccions : </th>
                         <td>   <strong> ${feature.properties.Restriccio} </strong> </td>
                     </tr>
-                    <tr>
+                    <tr id="vandalisme">
                        <th>Vandalisme : </th>
                         <td>   <strong> ${feature.properties.Vandalisme} </strong> </td>
                     </tr>
@@ -1734,8 +1889,8 @@
                 $('#messages').html();
 
             });
-        }
 
+        }
 
     </script>
 
