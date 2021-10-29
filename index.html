@@ -297,9 +297,11 @@
         <!-- Categories -->
         <div class="sidebar-tabs">
             <ul role="tablist">
+                <li><a href="#metadata" role="tab"><i class="fa fa-comment"></i></a></li>
                 <li><a href="#messages" role="tab"><i class="fa fa-bars"></i></a></li>
                 <li><a href="#home" role="tab"><i class="fa fa-info"></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-search"></i></a></li>
+                
 
                 <li><a href="#settings" role="tab" target="_blank"><i class="fa fa-gear"></i></a></li>
             </ul>
@@ -369,11 +371,23 @@
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em;"><strong>Selecciona la cartografia de base:</strong></p>
             </div>
+            <div class="sidebar-pane" id="metadata">
+                <h1 class="sidebar-header">Presentació<span class="sidebar-close"><i class="fa fa-times"></i></i></span>
+                </h1>
+                <p style="margin-top: 1em; font-size: 1.2em;">Aquest visor web es composa per una base de dades obertes de l'Ajuntament de Barcelona, concretament de la Guàrdia Urbana. <br> En aquesta, es llisten totes les incidències gestionades per la Guàrdia Urbana durant el passat 2020.<br>
+                    <ul style="margin-top: 1em; font-size: 1.2em;"><li> La primera pestanya, permet fer una tematització de colors graduats per tipologia d'incidència, a nivell de barri. La definició de cada tipologia concreta es pot consultar a (LINK).</li>
+                        <li> La segona pestanya, que s'activa al clicar sobre qualsevol barri de la ciutat, mostra un llistat de totes les incidències per aquell barri. </li>
+                        <li> La tercera correspon a un geocodificador que permet realitzar cerques per adreces o topònims.</li>
+                        <li> La quarta pestanya permet alternar entre dos mapes base (defecte i fosc).</li>
+                        <li> Per últim, la pestanya inferior (?) serveix per contactar amb el desenvolupador del visor (via mail).</li></p>
+                    </ul>
+                    </div>
+
         </div>
     </div>
 
 
-
+    
 
     <div id="mapid" class="sidebar-map"> </div>
 
@@ -1891,6 +1905,10 @@
             });
 
         }
+//TASQUES PRÈVIES A LA PUBLICACIÓ:
+
+//Crear taula a la pestanya 'Mapes temàtics' que mostri els valors de cada barri al seleccionar un tipus d'incidència. (com la pestanya d'info, però canviant tipologies per barris)
+//Estilar pestanya de 'Presentació', i mirar tema de Cookies (un alert si es el primer cop que accedeixes al mapa).
 
     </script>
 
