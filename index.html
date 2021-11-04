@@ -427,7 +427,7 @@
 
 
             var Topo = L.mapboxGL({
-                style: 'mapbox://styles/marcrb3/ck8hbmtvl0fsd1ilimcdx8jwm',
+                style: 'mapbox://styles/marcrb3/ckvkmr0pi400f14oap3nljgkx',
                 accessToken: 'pk.eyJ1IjoibWFyY3JiMyIsImEiOiJjanJqanZvMXowYzdnNDRsbGN4N3JyMGhuIn0.im2TOkqyqEpCXhN4LWoZuA',
             }).addTo(mymap);
 
@@ -970,6 +970,7 @@
                     netejaEstil();
                     document.getElementById("agressions").style.backgroundColor = "yellow";
                     currentStyle = "agressions";
+                    
                 }
                 else if (selectedTipus == "Baralles") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -984,6 +985,7 @@
                     netejaEstil();
                     document.getElementById("baralles").style.backgroundColor = "yellow";
                     currentStyle = "baralles";
+                    
                 }
                 else if (selectedTipus == "Accidents") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1908,6 +1910,8 @@
             });
 
         }
+
+     
 //TASQUES PRÈVIES A LA PUBLICACIÓ:
 
 //Crear taula a la pestanya 'Mapes temàtics' que mostri els valors de cada barri al seleccionar un tipus d'incidència. (com la pestanya d'info, però canviant tipologies per barris)
