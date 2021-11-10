@@ -8,14 +8,14 @@
     <meta charset="utf-8">
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="leaflet-sidebar.js"></script>
+    <script src="leaflet-sidebar_dark.js"></script>
     <!-- <script src="https://raw.github.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script> -->
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <!--[if lte IE 8]><link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
 
-    <link rel="stylesheet" href="leaflet-sidebar.css" />
+    <link rel="stylesheet" href="leaflet-sidebar_dark.css" />
 
     <!-- Mapbox GL -->
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css" rel='stylesheet' />
@@ -85,8 +85,8 @@
             padding: 25px;
             width: 250px;
             height: 150px;
-            background: #fff;
-            border: 2px solid #000;
+            background: rgb(0, 0, 0);
+            border: 2px solid rgb(255, 255, 255);
             font-weight: bold;
             font-size: 1.1em;
             text-align: center;
@@ -109,7 +109,7 @@
 
         .leaflet-control-layers-toggle:after {
 
-            color: rgb(26, 24, 24);
+            color: rgb(0, 0, 0);
             font-weight: bold;
             font-size: 14px;
             padding-right: 50px;
@@ -176,7 +176,7 @@
         }
 
         .barra {
-            background: white;
+            background: rgb(0, 0, 0);
             border-radius: 5px;
 
             z-index: 10000;
@@ -225,6 +225,7 @@
             background-color: rgb(48, 48, 48);
             color: rgb(252, 252, 252);
         }
+
         #clar {
             background-color: rgb(194, 192, 192);
             color: rgb(15, 15, 15);
@@ -304,7 +305,7 @@
 
         .legend {
             line-height: 18px;
-            color: #555;
+            color: white;
         }
 
         .legend i {
@@ -320,6 +321,39 @@
             font-weight: bold;
             font-size: 0.9em;
         }
+
+        li {
+            color: white;
+        }
+
+        p {
+            color: white;
+        }
+
+        th,
+        td {
+            color: white;
+            background-color: black;
+        }
+
+        table :hover {
+            background-color: black;
+        }
+
+
+        a {
+            color: rgb(136, 174, 247);
+        }
+
+        .leaflet-control-zoom-in,
+        .leaflet-control-zoom-out, 
+        .leaflet-bar-part.leaflet-bar-part-single,
+        
+        .leaflet-control-scale-line {
+            background: black !important;
+            color: white !important;
+        }
+     
     </style>
 </head>
 
@@ -328,17 +362,19 @@
         <!-- Categories -->
         <div class="sidebar-tabs">
             <ul role="tablist">
-                <li><a href="#metadata" role="tab"><i class="fa fa-info"></i></a></li>
-                <li><a href="#messages" role="tab"><i class="fa fa-bars"></i></a></li>
-                <li><a href="#home" role="tab"><i class="fa fa-map"></i></i></a></li>
-                <li><a href="#profile" role="tab"><i class="fa fa-search"></i></a></li>
+                <li><a href="#metadata" role="tab"><i class="fa fa-info" style="color: white;"></i></a></li>
+                <li><a href="#messages" role="tab"><i class="fa fa-bars" style="color: white;"></i></a></li>
+                <li><a href="#home" role="tab"><i class="fa fa-map" style="color: white;"></i></a></li>
+                <li><a href="#profile" role="tab"><i class="fa fa-search" style="color: white;"></i></a></li>
 
 
-                <li><a href="#settings" role="tab" target="_blank"><i class="fa fa-gear"></i></a></li>
+                <li><a href="#settings" role="tab" target="_blank"><i class="fa fa-gear" style="color: white;"></i></a>
+                </li>
             </ul>
 
             <ul role="tablist">
-                <li><a href="mailto:marcrb3@gmail.com" role="tab"><i class="fa fa-question"></i></a></li>
+                <li><a href="mailto:marcrb3@gmail.com" role="tab"><i class="fa fa-question"
+                            style="color: white;"></i></a></li>
             </ul>
         </div>
 
@@ -350,26 +386,27 @@
                     <span class="sidebar-close"><i class="fa fa-times"></i></span>
                 </h1>
 
-                <p style="margin-top: 1em; font-size: 1.6em; "><strong>Selecciona qualsevol barri del
+                <p style="margin-top: 1em; font-size: 1.6em;"><strong>Selecciona qualsevol barri del
                         mapa per
                         veure'n la informació.</strong></p>
 
             </div>
 
             <div class="sidebar-pane" id="profile">
-                <h1 class="sidebar-header" style="text-align: center;">Cerca<span class="sidebar-close"><i class="fa fa-times"></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Cerca<span class="sidebar-close"><i
+                            class="fa fa-times"></i></span>
                 </h1>
-                <p style="margin-top: 1em; font-size: 1.2em; "><strong>Introdueix una adreça, municipi, codi postal o
+                <p style="margin-top: 1em; font-size: 1.2em;"><strong>Introdueix una adreça, municipi, codi postal o
                         topònim.</strong></p>
 
 
             </div>
 
             <div class="sidebar-pane" id="messages">
-                <h1 class="sidebar-header" style="margin-bottom: 1em; text-align: center;">Mapes temàtics<span class="sidebar-close"><i
-                            class="fa fa-times"></i></span>
+                <h1 class="sidebar-header" style="margin-bottom: 1em; text-align: center;">Mapes temàtics<span
+                        class="sidebar-close"><i class="fa fa-times"></i></span>
                 </h1>
-                <label style="padding-right: 1em">Tipus d'incidència: </label>
+                <label style="padding-right: 1em; color:white;">Tipus d'incidència: </label>
                 <select name="select" id="filtre" class="tipus">
                     <option value="buit" hidden selected>Selecciona variable</option>
                     <option value="Accidents">Accidents de Trànsit</option>
@@ -399,16 +436,18 @@
             </div>
 
             <div class="sidebar-pane" id="settings">
-                <h1 class="sidebar-header" style="text-align: center;">Configuració<span class="sidebar-close"><i class="fa fa-times"></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Configuració<span class="sidebar-close"><i
+                            class="fa fa-times"></i></span>
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em;"><strong>Selecciona el tema del visor:</strong></p>
                 <div class="tema">
-                    <a class="btn" id="clar" href="#" role="button">Clar</a>
-                    <a class="btn" id="fosc" href="index_dark.html" role="button">Fosc</a>
+                    <a class="btn" id="clar" href="index.html" role="button">Clar</a>
+                    <a class="btn" id="fosc" href="#" role="button">Fosc</a>
                 </div>
             </div>
             <div class="sidebar-pane" id="metadata">
-                <h1 class="sidebar-header" style="text-align: center;">Presentació<span class="sidebar-close"><i class="fa fa-times"></i></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Presentació<span class="sidebar-close"><i
+                            class="fa fa-times"></i></i></span>
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em;">Aquest visor web es composa per una base de dades obertes
                     de l'Ajuntament de Barcelona, concretament de la Guàrdia Urbana. En aquesta, es llisten totes
@@ -423,15 +462,16 @@
                     <li> <a href="#" onclick="switchProfile()" role="button">La tercera pestanya </a> correspon a un
                         geocodificador que permet realitzar cerques per adreces o topònims.
                     </li>
-                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet seleccionar el tema del visor (clar o fosc).</li>
+                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet alternar
+                        entre dos mapes base (defecte i fosc).</li>
                     <li> Per últim, la pestanya inferior <a href="mailto:marcrb3@gmail.com">(?)</a> serveix per
                         contactar amb el desenvolupador del visor (via
                         mail).</li>
                     </p>
                 </ul><br>
                 <div
-                    style="background-color: rgba(201, 199, 199, 0.445); margin-top: 1em; margin-bottom: 1em; padding: 1em;">
-                    <p style="color:rgb(204, 0, 0); font-weight: bolder; text-align: center; font-size: 1.2em;">
+                    style="background-color: rgba(105, 105, 105, 0.445); margin-top: 1em; margin-bottom: 1em; padding: 1em;">
+                    <p style="color:rgb(255, 254, 254); font-weight: bolder; text-align: center; font-size: 1.2em;">
                         Actualment aquest
                         visor es troba en desenvolupament. <br><br>Si el consultes des d'un dispositiu mòvil pot
                         ser que no estiguin actives totes les funcionalitats.<br><br> Per dubtes, consultes o
@@ -439,9 +479,9 @@
                         contactar a la pestanya [?].</p>
                 </div>
                 <div class="font">
-                    Font de les dades: <a
-                        href="https://opendata-ajuntament.barcelona.cat/data/ca/dataset/incidents-gestionats-gub"
-                        target="_blank">Open Data BCN - Ajuntament de Barcelona</a>
+                    <p>Font de les dades: <a
+                            href="https://opendata-ajuntament.barcelona.cat/data/ca/dataset/incidents-gestionats-gub"
+                            target="_blank">Open Data BCN - Ajuntament de Barcelona</a></p>
                 </div>
             </div>
 
@@ -479,13 +519,13 @@
                 position: 'left'
             }).addTo(mymap);
 
-          
-
-
             var Topo = L.mapboxGL({
-                style: 'mapbox://styles/marcrb3/ckvkmr0pi400f14oap3nljgkx',
+                style: 'mapbox://styles/marcrb3/cjsu9je764ne51fn719pub5lu',
                 accessToken: 'pk.eyJ1IjoibWFyY3JiMyIsImEiOiJjanJqanZvMXowYzdnNDRsbGN4N3JyMGhuIn0.im2TOkqyqEpCXhN4LWoZuA',
             }).addTo(mymap);
+
+
+        
 
 
             var basemap = {
@@ -508,7 +548,9 @@
                 control.onAdd(mymap)
             );
 
-           
+            
+                
+        
 
             L.Map.include({
                 'clearLayers': function () {
@@ -983,30 +1025,7 @@
                 mymap.removeControl(currentLegend);
             }
 
-            netejaEstil = function () {
-                document.getElementById("agressions").style.backgroundColor = "#fff";
-                document.getElementById("baralles").style.backgroundColor = "#fff";
-                document.getElementById("accidents").style.backgroundColor = "#fff";
-                document.getElementById("violencia").style.backgroundColor = "#fff";
-                document.getElementById("convi").style.backgroundColor = "#fff";
-                document.getElementById("psico").style.backgroundColor = "#fff";
-                document.getElementById("alarmes").style.backgroundColor = "#fff";
-                document.getElementById("proteccio").style.backgroundColor = "#fff";
-                document.getElementById("atemptats").style.backgroundColor = "#fff";
-                document.getElementById("avariesSM").style.backgroundColor = "#fff";
-                document.getElementById("avariesSP").style.backgroundColor = "#fff";
-                document.getElementById("conflictes").style.backgroundColor = "#fff";
-                document.getElementById("llibertat").style.backgroundColor = "#fff";
-                document.getElementById("incendis").style.backgroundColor = "#fff";
-                document.getElementById("infraccions").style.backgroundColor = "#fff";
-                document.getElementById("estaciona").style.backgroundColor = "#fff";
-                document.getElementById("inspeccions").style.backgroundColor = "#fff";
-                document.getElementById("manifestacions").style.backgroundColor = "#fff";
-                document.getElementById("obres").style.backgroundColor = "#fff";
-                document.getElementById("ocupacions").style.backgroundColor = "#fff";
-                document.getElementById("vandalisme").style.backgroundColor = "#fff";
-                document.getElementById("restriccions").style.backgroundColor = "#fff";
-            }
+
 
             legend.addTo(mymap);
             var currentLegend = legend;
@@ -1040,10 +1059,9 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAgressions;
                     legendAgressions.addTo(mymap);
-                    netejaEstil();
 
-                    document.getElementById("agressions").style.backgroundColor = "yellow";
-                    currentStyle = "agressions";
+
+
 
 
                 }
@@ -1058,10 +1076,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendBaralles;
                     legendBaralles.addTo(mymap);
-                    netejaEstil();
 
-                    document.getElementById("baralles").style.backgroundColor = "yellow";
-                    currentStyle = "baralles";
 
 
                 }
@@ -1075,9 +1090,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAccidents;
                     legendAccidents.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("accidents").style.backgroundColor = "yellow";
-                    currentStyle = "accidents";
+
                 }
                 else if (selectedTipus == "Domestica") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1089,8 +1102,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendViolencia;
                     legendViolencia.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("violencia").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Conv_veins") {
@@ -1103,8 +1115,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConvi;
                     legendConvi.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("convi").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Psicotrop") {
@@ -1117,8 +1128,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendPsico;
                     legendPsico.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("psico").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Alarmes") {
@@ -1131,8 +1141,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAlarmes;
                     legendAlarmes.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("alarmes").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Proteccio") {
@@ -1145,8 +1154,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendProteccio;
                     legendProteccio.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("proteccio").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Atemptats_") {
@@ -1159,8 +1167,6 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAtemptats;
                     legendAtemptats.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("atemptats").style.backgroundColor = "yellow";
 
                 }
                 else if (selectedTipus == "Avaries_SM") {
@@ -1173,8 +1179,6 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSM;
                     legendAvariesSM.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("avariesSM").style.backgroundColor = "yellow";
 
                 }
                 else if (selectedTipus == "Avaries_SP") {
@@ -1187,8 +1191,6 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSP;
                     legendAvariesSP.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("avariesSP").style.backgroundColor = "yellow";
 
                 }
                 else if (selectedTipus == "Conflictes") {
@@ -1201,8 +1203,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConflictes;
                     legendConflictes.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("conflictes").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Llibertat") {
@@ -1215,8 +1216,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendLlibertat;
                     legendLlibertat.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("llibertat").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Incendis_s") {
@@ -1229,8 +1229,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendIncendis;
                     legendIncendis.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("incendis").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Infraccion") {
@@ -1243,8 +1242,6 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInfraccions;
                     legendInfraccions.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("infraccions").style.backgroundColor = "yellow";
 
                 }
                 else if (selectedTipus == "Estacionam") {
@@ -1257,8 +1254,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendEstaciona;
                     legendEstaciona.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("estaciona").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Inspeccion") {
@@ -1271,8 +1267,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInspeccions;
                     legendInspeccions.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("inspeccions").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Manifestac") {
@@ -1285,8 +1280,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendManifestacions;
                     legendManifestacions.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("manifestacions").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Obres_sum") {
@@ -1299,8 +1293,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendObres;
                     legendObres.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("obres").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Ocupacions") {
@@ -1313,8 +1306,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendOcupa;
                     legendOcupa.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("ocupacions").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Restriccio") {
@@ -1327,8 +1319,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendRestriccions;
                     legendRestriccions.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("restriccions").style.backgroundColor = "yellow";
+
 
                 }
                 else if (selectedTipus == "Vandalisme") {
@@ -1341,8 +1332,7 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendVandalisme;
                     legendVandalisme.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("vandalisme").style.backgroundColor = "yellow";
+
 
                 }
             });
@@ -1564,8 +1554,8 @@
         function style(feature) {
             return {
                 weight: 1,
-                opacity: 1,
-                color: 'black',
+                opacity: 0.75,
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: '#ebeff5'
@@ -1576,7 +1566,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorAccidents(feature.properties.Accidents)
@@ -1587,7 +1577,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorBaralles(feature.properties.Baralles)
@@ -1599,7 +1589,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorAgressions(feature.properties.Agresions)
@@ -1611,7 +1601,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorDomestica(feature.properties.Domestica)
@@ -1622,7 +1612,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorConvi(feature.properties.Conv_veins)
@@ -1633,7 +1623,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorPsico(feature.properties.Psicotrop)
@@ -1644,7 +1634,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorAlarmes(feature.properties.Alarmes)
@@ -1655,7 +1645,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorProtect(feature.properties.Proteccio)
@@ -1666,7 +1656,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorAtempt(feature.properties.Atemptats_)
@@ -1677,7 +1667,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorAvariesSM(feature.properties.Avaries_SM)
@@ -1688,7 +1678,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorAvariesSP(feature.properties.Avaries_SP)
@@ -1699,7 +1689,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorConflictes(feature.properties.Conflictes)
@@ -1710,7 +1700,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorLlibertat(feature.properties.Llibertat)
@@ -1721,7 +1711,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorIncendis(feature.properties.Incendis_s)
@@ -1732,7 +1722,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorInfraccions(feature.properties.Infraccion)
@@ -1743,7 +1733,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorEstaciona(feature.properties.Estacionam)
@@ -1754,7 +1744,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorInspeccions(feature.properties.Inspeccion)
@@ -1765,7 +1755,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorManifesta(feature.properties.Manifestac)
@@ -1776,7 +1766,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorObressum(feature.properties.Obres_sum)
@@ -1787,7 +1777,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorOcupa(feature.properties.Ocupacions)
@@ -1798,7 +1788,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorRestriccions(feature.properties.Restriccio)
@@ -1809,7 +1799,7 @@
             return {
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
                 fillColor: getColorVandalisme(feature.properties.Vandalisme)
@@ -1839,8 +1829,8 @@
 
             layer.setStyle({
                 weight: 1,
-                opacity: 1,
-                color: 'black',
+                opacity: 0.75,
+                color: 'white',
                 dashArray: '',
                 fillOpacity: 0.75,
             });
@@ -1857,7 +1847,7 @@
                 weight: 3,
                 color: 'orange',
                 dashArray: '',
-                fillOpacity: 0.65
+                fillOpacity: 0.75
             });
 
             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
