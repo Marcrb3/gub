@@ -289,6 +289,12 @@
             margin-right: 8px;
             opacity: 0.7;
         }
+
+        .font {
+            padding-top: 2em;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 
@@ -297,11 +303,11 @@
         <!-- Categories -->
         <div class="sidebar-tabs">
             <ul role="tablist">
-                <li><a href="#metadata" role="tab"><i class="fa fa-comment"></i></a></li>
+                <li><a href="#metadata" role="tab"><i class="fa fa-info"></i></a></li>
                 <li><a href="#messages" role="tab"><i class="fa fa-bars"></i></a></li>
-                <li><a href="#home" role="tab"><i class="fa fa-info"></i></a></li>
+                <li><a href="#home" role="tab"><i class="fa fa-map"></i></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-search"></i></a></li>
-                
+
 
                 <li><a href="#settings" role="tab" target="_blank"><i class="fa fa-gear"></i></a></li>
             </ul>
@@ -314,18 +320,19 @@
         <!-- Tab panes -->
         <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
-                <h1 class="sidebar-header">
+                <h1 class="sidebar-header" style="text-align: center;">
                     Incidències 2020 BCN
                     <span class="sidebar-close"><i class="fa fa-times"></i></span>
                 </h1>
 
-                <p style="margin-top: 1em; font-size: 1.6em; text-align: center;"><strong>Selecciona qualsevol barri per
+                <p style="margin-top: 1em; font-size: 1.6em; "><strong>Selecciona qualsevol barri del
+                        mapa per
                         veure'n la informació.</strong></p>
 
             </div>
 
             <div class="sidebar-pane" id="profile">
-                <h1 class="sidebar-header">Cerca<span class="sidebar-close"><i class="fa fa-times"></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Cerca<span class="sidebar-close"><i class="fa fa-times"></i></span>
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em; "><strong>Introdueix una adreça, municipi, codi postal o
                         topònim.</strong></p>
@@ -334,7 +341,7 @@
             </div>
 
             <div class="sidebar-pane" id="messages">
-                <h1 class="sidebar-header" style="margin-bottom: 1em">Mapes temàtics<span class="sidebar-close"><i
+                <h1 class="sidebar-header" style="margin-bottom: 1em; text-align: center;">Mapes temàtics<span class="sidebar-close"><i
                             class="fa fa-times"></i></span>
                 </h1>
                 <label style="padding-right: 1em">Tipus d'incidència: </label>
@@ -367,30 +374,54 @@
             </div>
 
             <div class="sidebar-pane" id="settings">
-                <h1 class="sidebar-header">Configuració<span class="sidebar-close"><i class="fa fa-times"></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Configuració<span class="sidebar-close"><i class="fa fa-times"></i></span>
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em;"><strong>Selecciona la cartografia de base:</strong></p>
             </div>
             <div class="sidebar-pane" id="metadata">
-                <h1 class="sidebar-header">Presentació<span class="sidebar-close"><i class="fa fa-times"></i></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Presentació<span class="sidebar-close"><i class="fa fa-times"></i></i></span>
                 </h1>
-                <p style="margin-top: 1em; font-size: 1.2em;">Aquest visor web es composa per una base de dades obertes de l'Ajuntament de Barcelona, concretament de la Guàrdia Urbana. <br> En aquesta, es llisten totes les incidències gestionades per la Guàrdia Urbana durant el passat 2020.<br>
-                    <ul style="margin-top: 1em; font-size: 1.2em;"><li> La primera pestanya, permet fer una tematització de colors graduats per tipologia d'incidència, a nivell de barri. La definició de cada tipologia concreta es pot consultar a (LINK).</li>
-                        <li> La segona pestanya, que s'activa al clicar sobre qualsevol barri de la ciutat, mostra un llistat de totes les incidències per aquell barri. </li>
-                        <li> La tercera correspon a un geocodificador que permet realitzar cerques per adreces o topònims.</li>
-                        <li> La quarta pestanya permet alternar entre dos mapes base (defecte i fosc).</li>
-                        <li> Per últim, la pestanya inferior (?) serveix per contactar amb el desenvolupador del visor (via mail).</li></p>
-                    </ul><br>
-                    <div style="background-color: rgba(201, 199, 199, 0.445); margin-top: 1em; margin-bottom: 1em; padding: 1em;">
-                    <p style="color:red; font-weight: bolder; text-align: center; font-size: 1.2em;">Actualment aquest visor encara es troba en desenvolupament. <br><br>Si el consultes des d'un dispositiu mòvil pot ser que no estiguin actives totes les funcionalitats.<br><br> Per dubtes o suggeriments, em pots contactar a la pestanya [?].</p>
+                <p style="margin-top: 1em; font-size: 1.2em;">Aquest visor web es composa per una base de dades obertes
+                    de l'Ajuntament de Barcelona, concretament de la Guàrdia Urbana. En aquesta, es llisten totes
+                    les incidències gestionades per la Guàrdia Urbana durant el passat 2020.<br>
+                <ul style="margin-top: 1em; font-size: 1.2em;">
+                    <li> <a href="#" onclick="switchMsg()" role="button">La primera pestanya</a>, permet fer una
+                        tematització de colors graduats per tipologia d'incidència,
+                        a nivell de barri.</li>
+                    <li> <a href="#" onclick="switchHome()" role="button">La segona pestanya</a>, que s'activa al clicar
+                        sobre qualsevol barri de la ciutat, mostra un
+                        llistat de totes les incidències per aquell barri. </li>
+                    <li> <a href="#" onclick="switchProfile()" role="button">La tercera pestanya </a> correspon a un
+                        geocodificador que permet realitzar cerques per adreces o topònims.
+                    </li>
+                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet alternar
+                        entre dos mapes base (defecte i fosc).</li>
+                    <li> Per últim, la pestanya inferior <a href="mailto:marcrb3@gmail.com">(?)</a> serveix per
+                        contactar amb el desenvolupador del visor (via
+                        mail).</li>
+                    </p>
+                </ul><br>
+                <div
+                    style="background-color: rgba(201, 199, 199, 0.445); margin-top: 1em; margin-bottom: 1em; padding: 1em;">
+                    <p style="color:rgb(204, 0, 0); font-weight: bolder; text-align: center; font-size: 1.2em;">
+                        Actualment aquest
+                        visor es troba en desenvolupament. <br><br>Si el consultes des d'un dispositiu mòvil pot
+                        ser que no estiguin actives totes les funcionalitats.<br><br> Per dubtes, consultes o
+                        suggeriments, em pots
+                        contactar a la pestanya [?].</p>
                 </div>
+                <div class="font">
+                    Font de les dades: <a
+                        href="https://opendata-ajuntament.barcelona.cat/data/ca/dataset/incidents-gestionats-gub"
+                        target="_blank">Open Data BCN - Ajuntament de Barcelona</a>
                 </div>
+            </div>
 
         </div>
     </div>
 
 
-    
+
 
     <div id="mapid" class="sidebar-map"> </div>
 
@@ -463,6 +494,24 @@
                     }, this);
                 }
             });
+
+            switchMsg = function () {
+                sidebar.open('messages');
+
+            }
+            switchHome = function () {
+                sidebar.open('home');
+
+            }
+            switchSettings = function () {
+                sidebar.open('settings');
+
+            }
+            switchProfile = function () {
+                sidebar.open('profile');
+
+            }
+
 
             //creem llegendes
 
@@ -963,14 +1012,17 @@
                         style: styleAgresions,
                     });
                     neteja();
+
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAgressions;
                     legendAgressions.addTo(mymap);
                     netejaEstil();
+
                     document.getElementById("agressions").style.backgroundColor = "yellow";
                     currentStyle = "agressions";
-                    
+
+
                 }
                 else if (selectedTipus == "Baralles") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -978,14 +1030,17 @@
                         style: styleBaralles,
                     });
                     neteja();
+
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendBaralles;
                     legendBaralles.addTo(mymap);
                     netejaEstil();
+
                     document.getElementById("baralles").style.backgroundColor = "yellow";
                     currentStyle = "baralles";
-                    
+
+
                 }
                 else if (selectedTipus == "Accidents") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1770,9 +1825,9 @@
             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                 layer.bringToFront();
             }
-       }
+        }
 
-       function highlightFeature2(e) {
+        function highlightFeature2(e) {
             var layer = e.target;
 
             layer.setStyle({
@@ -1792,18 +1847,18 @@
         //Omplim el contingut de la sidebar al clicar sobre qualsevol dels barris
 
         function onEachFeature(feature, layer) {
-            
+
             layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM);
 
             layer.on({
                 mouseover: highlightFeature,
                 mouseout: resetHighlight,
-                click: highlightFeature2,   
+                click: highlightFeature2,
             });
 
 
             layer.on('click', function (e) {
-                
+
                 toggleSidebar();
 
 
@@ -1909,9 +1964,11 @@
 
             });
 
+
+
         }
 
-     
+
 //TASQUES PRÈVIES A LA PUBLICACIÓ:
 
 //Crear taula a la pestanya 'Mapes temàtics' que mostri els valors de cada barri al seleccionar un tipus d'incidència. (com la pestanya d'info, però canviant tipologies per barris)
