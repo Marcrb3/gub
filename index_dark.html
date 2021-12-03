@@ -363,8 +363,8 @@
         <div class="sidebar-tabs">
             <ul role="tablist">
                 <li><a href="#metadata" role="tab"><i class="fa fa-info" style="color: white;"></i></a></li>
-                <li><a href="#messages" role="tab"><i class="fa fa-bars" style="color: white;"></i></a></li>
-                <li><a href="#home" role="tab"><i class="fa fa-map" style="color: white;"></i></a></li>
+                <li><a href="#messages" role="tab"><i class="fa fa-map" style="color: white;"></i></a></li>
+                <li><a href="#home" role="tab"><i class="fa fa-bars" style="color: white;"></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-search" style="color: white;"></i></a></li>
 
 
@@ -446,8 +446,7 @@
                 </div>
             </div>
             <div class="sidebar-pane" id="metadata">
-                <h1 class="sidebar-header" style="text-align: center;">Presentació<span class="sidebar-close"><i
-                            class="fa fa-times"></i></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Presentació<span class="sidebar-close"><i class="fa fa-times"></i></i></span>
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em;">Aquest visor web es composa per una base de dades obertes
                     de l'Ajuntament de Barcelona, concretament de la Guàrdia Urbana. En aquesta, es llisten totes
@@ -455,29 +454,20 @@
                 <ul style="margin-top: 1em; font-size: 1.2em;">
                     <li> <a href="#" onclick="switchMsg()" role="button">La primera pestanya</a>, permet fer una
                         tematització de colors graduats per tipologia d'incidència,
-                        a nivell de barri.</li>
+                        a nivell de barri.</li><br>
                     <li> <a href="#" onclick="switchHome()" role="button">La segona pestanya</a>, que s'activa al clicar
                         sobre qualsevol barri de la ciutat, mostra un
-                        llistat de totes les incidències per aquell barri. </li>
+                        llistat de totes les incidències per aquell barri. </li><br>
                     <li> <a href="#" onclick="switchProfile()" role="button">La tercera pestanya </a> correspon a un
                         geocodificador que permet realitzar cerques per adreces o topònims.
-                    </li>
-                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet alternar
-                        entre dos mapes base (defecte i fosc).</li>
+                    </li><br>
+                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet seleccionar el tema del visor (clar o fosc).</li><br>
                     <li> Per últim, la pestanya inferior <a href="mailto:marcrb3@gmail.com">(?)</a> serveix per
                         contactar amb el desenvolupador del visor (via
-                        mail).</li>
+                        mail).</li><br>
                     </p>
                 </ul><br>
-                <div
-                    style="background-color: rgba(105, 105, 105, 0.445); margin-top: 1em; margin-bottom: 1em; padding: 1em;">
-                    <p style="color:rgb(255, 254, 254); font-weight: bolder; text-align: center; font-size: 1.2em;">
-                        Actualment aquest
-                        visor es troba en desenvolupament. <br><br>Si el consultes des d'un dispositiu mòvil pot
-                        ser que no estiguin actives totes les funcionalitats.<br><br> Per dubtes, consultes o
-                        suggeriments, em pots
-                        contactar a la pestanya [?].</p>
-                </div>
+                
                 <div class="font">
                     <p>Font de les dades: <a
                             href="https://opendata-ajuntament.barcelona.cat/data/ca/dataset/incidents-gestionats-gub"
@@ -518,10 +508,12 @@
             var sidebar = L.control.sidebar('sidebar', {
                 position: 'left'
             }).addTo(mymap);
+            sidebar.open('messages');
 
             var Topo = L.mapboxGL({
                 style: 'mapbox://styles/marcrb3/cjsu9je764ne51fn719pub5lu',
                 accessToken: 'pk.eyJ1IjoibWFyY3JiMyIsImEiOiJjanJqanZvMXowYzdnNDRsbGN4N3JyMGhuIn0.im2TOkqyqEpCXhN4LWoZuA',
+                attribution: 'Desenvolupat per Marc Roca Ballesteros ©'
             }).addTo(mymap);
 
 
@@ -1021,7 +1013,7 @@
             neteja2 = function () {
                 mymap.clearLayers();
                 Topo.addTo(mymap);
-                kyIncidents.addTo(mymap);
+               
                 mymap.removeControl(currentLegend);
             }
 
@@ -1036,7 +1028,7 @@
             kyIncidents = L.geoJSON(incidents.responseJSON, {
                 onEachFeature: onEachFeature,
                 style: style,
-            }).addTo(mymap);
+            });
 
 
 
@@ -1054,7 +1046,7 @@
                         style: styleAgresions,
                     });
                     neteja();
-
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAgressions;
@@ -1071,7 +1063,7 @@
                         style: styleBaralles,
                     });
                     neteja();
-
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendBaralles;
@@ -1086,6 +1078,7 @@
                         style: styleAccidents,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAccidents;
@@ -1098,6 +1091,7 @@
                         style: styleDomestica,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendViolencia;
@@ -1111,6 +1105,7 @@
                         style: styleConvi,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConvi;
@@ -1124,6 +1119,7 @@
                         style: stylePsico,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendPsico;
@@ -1137,6 +1133,7 @@
                         style: styleAlarmes,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAlarmes;
@@ -1150,6 +1147,7 @@
                         style: styleProtect,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendProteccio;
@@ -1163,6 +1161,7 @@
                         style: styleAtempt,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAtemptats;
@@ -1175,6 +1174,7 @@
                         style: styleAvariesSM,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSM;
@@ -1187,6 +1187,7 @@
                         style: styleAvariesSP,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSP;
@@ -1199,6 +1200,7 @@
                         style: styleConflictes,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConflictes;
@@ -1212,6 +1214,7 @@
                         style: styleLlibertat,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendLlibertat;
@@ -1225,6 +1228,7 @@
                         style: styleIncendis,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendIncendis;
@@ -1238,6 +1242,7 @@
                         style: styleInfraccions,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInfraccions;
@@ -1250,6 +1255,7 @@
                         style: styleEstacionam,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendEstaciona;
@@ -1263,6 +1269,7 @@
                         style: styleInspeccion,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInspeccions;
@@ -1276,6 +1283,7 @@
                         style: styleManis,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendManifestacions;
@@ -1289,6 +1297,7 @@
                         style: styleObres,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendObres;
@@ -1302,6 +1311,7 @@
                         style: styleOcupa,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendOcupa;
@@ -1315,6 +1325,7 @@
                         style: styleRestrict,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendRestriccions;
@@ -1328,6 +1339,7 @@
                         style: styleVandals,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendVandalisme;

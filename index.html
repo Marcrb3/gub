@@ -329,8 +329,8 @@
         <div class="sidebar-tabs">
             <ul role="tablist">
                 <li><a href="#metadata" role="tab"><i class="fa fa-info"></i></a></li>
-                <li><a href="#messages" role="tab"><i class="fa fa-bars"></i></a></li>
-                <li><a href="#home" role="tab"><i class="fa fa-map"></i></i></a></li>
+                <li><a href="#messages" role="tab"><i class="fa fa-map"></i></a></li>
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-search"></i></a></li>
 
 
@@ -416,28 +416,20 @@
                 <ul style="margin-top: 1em; font-size: 1.2em;">
                     <li> <a href="#" onclick="switchMsg()" role="button">La primera pestanya</a>, permet fer una
                         tematització de colors graduats per tipologia d'incidència,
-                        a nivell de barri.</li>
+                        a nivell de barri.</li><br>
                     <li> <a href="#" onclick="switchHome()" role="button">La segona pestanya</a>, que s'activa al clicar
                         sobre qualsevol barri de la ciutat, mostra un
-                        llistat de totes les incidències per aquell barri. </li>
+                        llistat de totes les incidències per aquell barri. </li><br>
                     <li> <a href="#" onclick="switchProfile()" role="button">La tercera pestanya </a> correspon a un
                         geocodificador que permet realitzar cerques per adreces o topònims.
-                    </li>
-                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet seleccionar el tema del visor (clar o fosc).</li>
+                    </li><br>
+                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet seleccionar el tema del visor (clar o fosc).</li><br>
                     <li> Per últim, la pestanya inferior <a href="mailto:marcrb3@gmail.com">(?)</a> serveix per
                         contactar amb el desenvolupador del visor (via
-                        mail).</li>
+                        mail).</li><br>
                     </p>
                 </ul><br>
-                <div
-                    style="background-color: rgba(201, 199, 199, 0.445); margin-top: 1em; margin-bottom: 1em; padding: 1em;">
-                    <p style="color:rgb(204, 0, 0); font-weight: bolder; text-align: center; font-size: 1.2em;">
-                        Actualment aquest
-                        visor es troba en desenvolupament. <br><br>Si el consultes des d'un dispositiu mòvil pot
-                        ser que no estiguin actives totes les funcionalitats.<br><br> Per dubtes, consultes o
-                        suggeriments, em pots
-                        contactar a la pestanya [?].</p>
-                </div>
+                
                 <div class="font">
                     Font de les dades: <a
                         href="https://opendata-ajuntament.barcelona.cat/data/ca/dataset/incidents-gestionats-gub"
@@ -478,13 +470,14 @@
             var sidebar = L.control.sidebar('sidebar', {
                 position: 'left'
             }).addTo(mymap);
-
+            sidebar.open('messages');
           
 
 
             var Topo = L.mapboxGL({
                 style: 'mapbox://styles/marcrb3/ckvkmr0pi400f14oap3nljgkx',
                 accessToken: 'pk.eyJ1IjoibWFyY3JiMyIsImEiOiJjanJqanZvMXowYzdnNDRsbGN4N3JyMGhuIn0.im2TOkqyqEpCXhN4LWoZuA',
+                attribution: 'Desenvolupat per Marc Roca Ballesteros ©'
             }).addTo(mymap);
 
 
@@ -979,35 +972,11 @@
             neteja2 = function () {
                 mymap.clearLayers();
                 Topo.addTo(mymap);
-                kyIncidents.addTo(mymap);
+                
                 mymap.removeControl(currentLegend);
             }
 
-            netejaEstil = function () {
-                document.getElementById("agressions").style.backgroundColor = "#fff";
-                document.getElementById("baralles").style.backgroundColor = "#fff";
-                document.getElementById("accidents").style.backgroundColor = "#fff";
-                document.getElementById("violencia").style.backgroundColor = "#fff";
-                document.getElementById("convi").style.backgroundColor = "#fff";
-                document.getElementById("psico").style.backgroundColor = "#fff";
-                document.getElementById("alarmes").style.backgroundColor = "#fff";
-                document.getElementById("proteccio").style.backgroundColor = "#fff";
-                document.getElementById("atemptats").style.backgroundColor = "#fff";
-                document.getElementById("avariesSM").style.backgroundColor = "#fff";
-                document.getElementById("avariesSP").style.backgroundColor = "#fff";
-                document.getElementById("conflictes").style.backgroundColor = "#fff";
-                document.getElementById("llibertat").style.backgroundColor = "#fff";
-                document.getElementById("incendis").style.backgroundColor = "#fff";
-                document.getElementById("infraccions").style.backgroundColor = "#fff";
-                document.getElementById("estaciona").style.backgroundColor = "#fff";
-                document.getElementById("inspeccions").style.backgroundColor = "#fff";
-                document.getElementById("manifestacions").style.backgroundColor = "#fff";
-                document.getElementById("obres").style.backgroundColor = "#fff";
-                document.getElementById("ocupacions").style.backgroundColor = "#fff";
-                document.getElementById("vandalisme").style.backgroundColor = "#fff";
-                document.getElementById("restriccions").style.backgroundColor = "#fff";
-            }
-
+           
             legend.addTo(mymap);
             var currentLegend = legend;
             var currentStyle;
@@ -1017,7 +986,7 @@
             kyIncidents = L.geoJSON(incidents.responseJSON, {
                 onEachFeature: onEachFeature,
                 style: style,
-            }).addTo(mymap);
+            });
 
 
 
@@ -1035,7 +1004,7 @@
                         style: styleAgresions,
                     });
                     neteja();
-
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAgressions;
@@ -1045,7 +1014,7 @@
                     document.getElementById("agressions").style.backgroundColor = "yellow";
                     currentStyle = "agressions";
 
-
+                    
                 }
                 else if (selectedTipus == "Baralles") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1053,7 +1022,7 @@
                         style: styleBaralles,
                     });
                     neteja();
-
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendBaralles;
@@ -1063,7 +1032,7 @@
                     document.getElementById("baralles").style.backgroundColor = "yellow";
                     currentStyle = "baralles";
 
-
+                   
                 }
                 else if (selectedTipus == "Accidents") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1071,6 +1040,7 @@
                         style: styleAccidents,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAccidents;
@@ -1078,6 +1048,7 @@
                     netejaEstil();
                     document.getElementById("accidents").style.backgroundColor = "yellow";
                     currentStyle = "accidents";
+                    
                 }
                 else if (selectedTipus == "Domestica") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1085,13 +1056,14 @@
                         style: styleDomestica,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendViolencia;
                     legendViolencia.addTo(mymap);
                     netejaEstil();
                     document.getElementById("violencia").style.backgroundColor = "yellow";
-
+                   
                 }
                 else if (selectedTipus == "Conv_veins") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1099,13 +1071,14 @@
                         style: styleConvi,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConvi;
                     legendConvi.addTo(mymap);
                     netejaEstil();
                     document.getElementById("convi").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Psicotrop") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1113,13 +1086,14 @@
                         style: stylePsico,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendPsico;
                     legendPsico.addTo(mymap);
                     netejaEstil();
                     document.getElementById("psico").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Alarmes") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1127,13 +1101,14 @@
                         style: styleAlarmes,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAlarmes;
                     legendAlarmes.addTo(mymap);
                     netejaEstil();
                     document.getElementById("alarmes").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Proteccio") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1141,13 +1116,14 @@
                         style: styleProtect,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendProteccio;
                     legendProteccio.addTo(mymap);
                     netejaEstil();
                     document.getElementById("proteccio").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Atemptats_") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1155,13 +1131,14 @@
                         style: styleAtempt,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAtemptats;
                     legendAtemptats.addTo(mymap);
                     netejaEstil();
                     document.getElementById("atemptats").style.backgroundColor = "yellow";
-
+                   
                 }
                 else if (selectedTipus == "Avaries_SM") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1169,13 +1146,14 @@
                         style: styleAvariesSM,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSM;
                     legendAvariesSM.addTo(mymap);
                     netejaEstil();
                     document.getElementById("avariesSM").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Avaries_SP") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1183,13 +1161,14 @@
                         style: styleAvariesSP,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSP;
                     legendAvariesSP.addTo(mymap);
                     netejaEstil();
                     document.getElementById("avariesSP").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Conflictes") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1197,13 +1176,14 @@
                         style: styleConflictes,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConflictes;
                     legendConflictes.addTo(mymap);
                     netejaEstil();
                     document.getElementById("conflictes").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Llibertat") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1211,13 +1191,14 @@
                         style: styleLlibertat,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendLlibertat;
                     legendLlibertat.addTo(mymap);
                     netejaEstil();
                     document.getElementById("llibertat").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Incendis_s") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1225,13 +1206,14 @@
                         style: styleIncendis,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendIncendis;
                     legendIncendis.addTo(mymap);
                     netejaEstil();
                     document.getElementById("incendis").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Infraccion") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1239,13 +1221,14 @@
                         style: styleInfraccions,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInfraccions;
                     legendInfraccions.addTo(mymap);
                     netejaEstil();
                     document.getElementById("infraccions").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Estacionam") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1253,13 +1236,14 @@
                         style: styleEstacionam,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendEstaciona;
                     legendEstaciona.addTo(mymap);
                     netejaEstil();
                     document.getElementById("estaciona").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Inspeccion") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1267,13 +1251,14 @@
                         style: styleInspeccion,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInspeccions;
                     legendInspeccions.addTo(mymap);
                     netejaEstil();
                     document.getElementById("inspeccions").style.backgroundColor = "yellow";
-
+                  
                 }
                 else if (selectedTipus == "Manifestac") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1281,13 +1266,14 @@
                         style: styleManis,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendManifestacions;
                     legendManifestacions.addTo(mymap);
                     netejaEstil();
                     document.getElementById("manifestacions").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Obres_sum") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1295,13 +1281,14 @@
                         style: styleObres,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendObres;
                     legendObres.addTo(mymap);
                     netejaEstil();
                     document.getElementById("obres").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Ocupacions") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1309,13 +1296,14 @@
                         style: styleOcupa,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendOcupa;
                     legendOcupa.addTo(mymap);
                     netejaEstil();
                     document.getElementById("ocupacions").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Restriccio") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1323,13 +1311,14 @@
                         style: styleRestrict,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendRestriccions;
                     legendRestriccions.addTo(mymap);
                     netejaEstil();
                     document.getElementById("restriccions").style.backgroundColor = "yellow";
-
+                    
                 }
                 else if (selectedTipus == "Vandalisme") {
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
@@ -1337,13 +1326,14 @@
                         style: styleVandals,
                     });
                     neteja();
+                    sidebar.close();
                     mymap.addLayer(kxIncidents);
                     mymap.removeControl(currentLegend);
                     currentLegend = legendVandalisme;
                     legendVandalisme.addTo(mymap);
                     netejaEstil();
                     document.getElementById("vandalisme").style.backgroundColor = "yellow";
-
+                    
                 }
             });
         });
