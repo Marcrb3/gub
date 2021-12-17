@@ -5,7 +5,7 @@
     <title>Actuacions Guàrdia Urbana 2020</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta property='og:image' content='Snapshot.PNG'/>
+    <meta property='og:image' content='Snapshot.PNG' />
     <meta charset="utf-8">
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -226,6 +226,7 @@
             background-color: rgb(48, 48, 48);
             color: rgb(252, 252, 252);
         }
+
         #clar {
             background-color: rgb(194, 192, 192);
             color: rgb(15, 15, 15);
@@ -233,6 +234,7 @@
             width: 100%;
             margin-top: 1em;
         }
+
         #clar:hover,
         #clar:after {
             background-color: rgb(255, 253, 253);
@@ -246,6 +248,7 @@
             width: 100%;
             margin-top: 1em;
         }
+
         #fosc:hover,
         #fosc:after {
             background-color: rgb(44, 44, 44);
@@ -358,7 +361,8 @@
             </div>
 
             <div class="sidebar-pane" id="profile">
-                <h1 class="sidebar-header" style="text-align: center;">Cerca<span class="sidebar-close"><i class="fa fa-times"></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Cerca<span class="sidebar-close"><i
+                            class="fa fa-times"></i></span>
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em; "><strong>Introdueix una adreça, municipi, codi postal o
                         topònim.</strong></p>
@@ -367,8 +371,8 @@
             </div>
 
             <div class="sidebar-pane" id="messages">
-                <h1 class="sidebar-header" style="margin-bottom: 1em; text-align: center;">Mapes temàtics<span class="sidebar-close"><i
-                            class="fa fa-times"></i></span>
+                <h1 class="sidebar-header" style="margin-bottom: 1em; text-align: center;">Mapes temàtics<span
+                        class="sidebar-close"><i class="fa fa-times"></i></span>
                 </h1>
                 <label style="padding-right: 1em">Tipus d'incidència: </label>
                 <select name="select" id="filtre" class="tipus">
@@ -400,7 +404,8 @@
             </div>
 
             <div class="sidebar-pane" id="settings">
-                <h1 class="sidebar-header" style="text-align: center;">Configuració<span class="sidebar-close"><i class="fa fa-times"></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Configuració<span class="sidebar-close"><i
+                            class="fa fa-times"></i></span>
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em;"><strong>Selecciona el tema del visor:</strong></p>
                 <div class="tema">
@@ -409,7 +414,8 @@
                 </div>
             </div>
             <div class="sidebar-pane" id="metadata">
-                <h1 class="sidebar-header" style="text-align: center;">Presentació<span class="sidebar-close"><i class="fa fa-times"></i></i></span>
+                <h1 class="sidebar-header" style="text-align: center;">Presentació<span class="sidebar-close"><i
+                            class="fa fa-times"></i></i></span>
                 </h1>
                 <p style="margin-top: 1em; font-size: 1.2em;">Aquest visor web es composa per una base de dades obertes
                     de l'Ajuntament de Barcelona, concretament de la Guàrdia Urbana. En aquesta, es llisten totes
@@ -424,13 +430,14 @@
                     <li> <a href="#" onclick="switchProfile()" role="button">La tercera pestanya </a> correspon a un
                         geocodificador que permet realitzar cerques per adreces o topònims.
                     </li><br>
-                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet seleccionar el tema del visor (clar o fosc).</li><br>
+                    <li> <a href="#" onclick="switchSettings()" role="button">La quarta pestanya</a> permet seleccionar
+                        el tema del visor (clar o fosc).</li><br>
                     <li> Per últim, la pestanya inferior <a href="mailto:marcrb3@gmail.com">(?)</a> serveix per
                         contactar amb el desenvolupador del visor (via
                         mail).</li><br>
                     </p>
                 </ul><br>
-                
+
                 <div class="font">
                     Font de les dades: <a
                         href="https://opendata-ajuntament.barcelona.cat/data/ca/dataset/incidents-gestionats-gub"
@@ -448,6 +455,7 @@
 
     <script>
         var mymap;
+        var tipus;
         var incidents = $.ajax({
             url: "https://raw.githubusercontent.com/Marcrb3/gub/main/GUB_2020.geojson",
             dataType: "json",
@@ -472,7 +480,7 @@
                 position: 'left'
             }).addTo(mymap);
             sidebar.open('messages');
-          
+
 
 
             var Topo = L.mapboxGL({
@@ -484,7 +492,7 @@
 
             var basemap = {
                 'Topogràfic': Topo,
-                
+
 
             };
 
@@ -502,7 +510,7 @@
                 control.onAdd(mymap)
             );
 
-           
+
 
             L.Map.include({
                 'clearLayers': function () {
@@ -963,6 +971,14 @@
                 return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
             }
 
+               //Carreguem la capa al iniciar el mapa
+
+               kyIncidents = L.geoJSON(incidents.responseJSON, {
+                onEachFeature: onEachFeature2,
+                style: style,
+            }).addTo(mymap);
+
+
             //Netegem el mapa per poder alternar entre capes
 
             neteja = function () {
@@ -973,24 +989,16 @@
             neteja2 = function () {
                 mymap.clearLayers();
                 Topo.addTo(mymap);
-                
                 mymap.removeControl(currentLegend);
+                kyIncidents.addTo(mymap);
             }
 
-           
+
             legend.addTo(mymap);
             var currentLegend = legend;
             var currentStyle;
 
-            //Carreguem la capa al iniciar el mapa
-
-            kyIncidents = L.geoJSON(incidents.responseJSON, {
-                onEachFeature: onEachFeature,
-                style: style,
-            });
-
-
-
+         
             //Tematitzem el mapa en funcio del tipus d'incidència seleccionada
 
             $("select.tipus").change(function () {
@@ -1000,6 +1008,7 @@
 
 
                 if (selectedTipus == "Agresions") {
+                    tipus = 'Agresions';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleAgresions,
@@ -1010,14 +1019,12 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAgressions;
                     legendAgressions.addTo(mymap);
-                    netejaEstil();
 
-                    document.getElementById("agressions").style.backgroundColor = "yellow";
-                    currentStyle = "agressions";
 
-                    
+
                 }
                 else if (selectedTipus == "Baralles") {
+                    tipus = 'Baralles';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleBaralles,
@@ -1028,14 +1035,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendBaralles;
                     legendBaralles.addTo(mymap);
-                    netejaEstil();
 
-                    document.getElementById("baralles").style.backgroundColor = "yellow";
-                    currentStyle = "baralles";
 
-                   
                 }
                 else if (selectedTipus == "Accidents") {
+                    tipus = 'Accidents';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleAccidents,
@@ -1046,12 +1050,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAccidents;
                     legendAccidents.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("accidents").style.backgroundColor = "yellow";
-                    currentStyle = "accidents";
-                    
+
+
                 }
                 else if (selectedTipus == "Domestica") {
+                    tipus = 'Domestica';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleDomestica,
@@ -1062,11 +1065,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendViolencia;
                     legendViolencia.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("violencia").style.backgroundColor = "yellow";
-                   
+
+
                 }
                 else if (selectedTipus == "Conv_veins") {
+                    tipus = 'Conv_veins';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleConvi,
@@ -1077,11 +1080,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConvi;
                     legendConvi.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("convi").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Psicotrop") {
+                    tipus = 'Psicotrop';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: stylePsico,
@@ -1092,11 +1095,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendPsico;
                     legendPsico.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("psico").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Alarmes") {
+                    tipus = 'Alarmes';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleAlarmes,
@@ -1107,11 +1110,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAlarmes;
                     legendAlarmes.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("alarmes").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Proteccio") {
+                    tipus = 'Proteccio';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleProtect,
@@ -1122,11 +1125,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendProteccio;
                     legendProteccio.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("proteccio").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Atemptats_") {
+                    tipus = 'Atemptats_'
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleAtempt,
@@ -1137,11 +1140,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAtemptats;
                     legendAtemptats.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("atemptats").style.backgroundColor = "yellow";
-                   
+
+
                 }
                 else if (selectedTipus == "Avaries_SM") {
+                    tipus = 'Avaries_SM';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleAvariesSM,
@@ -1152,11 +1155,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSM;
                     legendAvariesSM.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("avariesSM").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Avaries_SP") {
+                    tipus = 'Avaries_SP';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleAvariesSP,
@@ -1167,11 +1170,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendAvariesSP;
                     legendAvariesSP.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("avariesSP").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Conflictes") {
+                    tipus = 'Conflictes';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleConflictes,
@@ -1182,11 +1185,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendConflictes;
                     legendConflictes.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("conflictes").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Llibertat") {
+                    tipus = 'Llibertat';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleLlibertat,
@@ -1197,11 +1200,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendLlibertat;
                     legendLlibertat.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("llibertat").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Incendis_s") {
+                    tipus = 'Incendis_s';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleIncendis,
@@ -1212,11 +1215,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendIncendis;
                     legendIncendis.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("incendis").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Infraccion") {
+                    tipus = 'Infraccion';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleInfraccions,
@@ -1227,11 +1230,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInfraccions;
                     legendInfraccions.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("infraccions").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Estacionam") {
+                    tipus = 'Estacionam';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleEstacionam,
@@ -1242,11 +1245,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendEstaciona;
                     legendEstaciona.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("estaciona").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Inspeccion") {
+                    tipus = 'Inspeccion';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleInspeccion,
@@ -1257,11 +1260,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendInspeccions;
                     legendInspeccions.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("inspeccions").style.backgroundColor = "yellow";
-                  
+
+
                 }
                 else if (selectedTipus == "Manifestac") {
+                    tipus = 'Manifestac';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleManis,
@@ -1272,11 +1275,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendManifestacions;
                     legendManifestacions.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("manifestacions").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Obres_sum") {
+                    tipus = 'Obres_sum';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleObres,
@@ -1287,11 +1290,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendObres;
                     legendObres.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("obres").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Ocupacions") {
+                    tipus = 'Ocupacions';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleOcupa,
@@ -1302,11 +1305,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendOcupa;
                     legendOcupa.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("ocupacions").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Restriccio") {
+                    tipus = 'Restriccio';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleRestrict,
@@ -1317,11 +1320,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendRestriccions;
                     legendRestriccions.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("restriccions").style.backgroundColor = "yellow";
-                    
+
+
                 }
                 else if (selectedTipus == "Vandalisme") {
+                    tipus = 'Vandalisme';
                     kxIncidents = L.geoJSON(incidents.responseJSON, {
                         onEachFeature: onEachFeature,
                         style: styleVandals,
@@ -1332,14 +1335,11 @@
                     mymap.removeControl(currentLegend);
                     currentLegend = legendVandalisme;
                     legendVandalisme.addTo(mymap);
-                    netejaEstil();
-                    document.getElementById("vandalisme").style.backgroundColor = "yellow";
-                    
+
+
                 }
             });
         });
-
-
 
         //Paletes de colors
 
@@ -1555,10 +1555,10 @@
         function style(feature) {
             return {
                 weight: 1,
-                opacity: 1,
+                opacity: 0.4,
                 color: 'black',
                 dashArray: '',
-                fillOpacity: 0.75,
+                fillOpacity: 0,
                 fillColor: '#ebeff5'
             };
         }
@@ -1841,6 +1841,23 @@
             }
         }
 
+        function resetHighlight2(e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 1,
+                opacity: 0.4,
+                color: 'black',
+                dashArray: '',
+                fillOpacity: 0,
+                fillColor: '#ebeff5'
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+        }
+
         function highlightFeature2(e) {
             var layer = e.target;
 
@@ -1861,8 +1878,77 @@
         //Omplim el contingut de la sidebar al clicar sobre qualsevol dels barris
 
         function onEachFeature(feature, layer) {
+            if (tipus == 'Agresions') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Agressions: " + feature.properties.Agresions);
+            }
+            else if (tipus == 'Accidents') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Accidents: " + feature.properties.Accidents);
+            }
+            else if (tipus == 'Domestica') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Violència domèstica: " + feature.properties.Domestica);
+            }
+            else if (tipus == 'Conv_veins') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Convivència veïnal: " + feature.properties.Conv_veins);
+            }
+            else if (tipus == 'Baralles') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Baralles: " + feature.properties.Baralles);
+            }
+            else if (tipus == 'Psicotrop') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Drogues / Psicotròpics: " + feature.properties.Psicotrop);
+            }
+            else if (tipus == 'Alarmes') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Alarmes: " + feature.properties.Alarmes);
+            }
+            else if (tipus == 'Proteccio') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Protecció: " + feature.properties.Proteccio);
+            }
+            else if (tipus == 'Atemptats_') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Atemptats: " + feature.properties.Atemptats_);
+            }
+            else if (tipus == 'Avaries_SM') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Avaries Serveis Municipals: " + feature.properties.Avaries_SM);
+            }
+            else if (tipus == 'Avaries_SP') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Avaries Serveis Públics: " + feature.properties.Avaries_SP);
+            }
+            else if (tipus == 'Conflictes') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Conflictes: " + feature.properties.Conflictes);
+            }
+            else if (tipus == 'Llibertat') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Llibertat sexual: " + feature.properties.Llibertat);
+            }
+            else if (tipus == 'Incendis_s') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Incendis: " + feature.properties.Incendis_s);
+            }
+            else if (tipus == 'Infraccion') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Infraccions de trànsit: " + feature.properties.Infraccion);
+            }
+            else if (tipus == 'Estacionam') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Estacionament: " + feature.properties.Estacionam);
+            }
+            else if (tipus == 'Inspeccion') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Inspeccions: " + feature.properties.Inspeccion);
+            }
+            else if (tipus == 'Manifestac') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Manifestacions: " + feature.properties.Manifestac);
+            }
+            else if (tipus == 'Obres_sum') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Obres: " + feature.properties.Obres_sum);
+            }
+            else if (tipus == 'Ocupacions') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Ocupacions: " + feature.properties.Ocupacions);
+            }
+            else if (tipus == 'Restriccio') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Restriccions: " + feature.properties.Restriccio);
+            }
+            else if (tipus == 'Vandalisme') {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM + "<br><br>" + "Vandalisme: " + feature.properties.Vandalisme);
+            }
 
-            layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM);
+            else {
+                layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM);
+            }
+
 
             layer.on({
                 mouseover: highlightFeature,
@@ -1876,7 +1962,7 @@
                 toggleSidebar();
 
 
-                $('#home').html(`<h1 class="sidebar-header" style="text-align:center; margin-bottom: 0.3em">${feature.properties.NOM}</h1>
+                $('#home').html(`<h1 class="sidebar-header" style="text-align:center; margin-bottom: 0.3em">${feature.properties.NOM} </h1>
 
                 <table class="table table-hover" id="llista" >
                     <tr>
@@ -1980,6 +2066,121 @@
 
 
 
+        }
+        function onEachFeature2(feature, layer) {
+            layer.bindTooltip("<h5 class='infoHeader'><strong>" + feature.properties.NOM);
+
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight2,
+                click: highlightFeature2,
+            });
+            layer.on('click', function (e) {
+
+                toggleSidebar();
+
+
+                $('#home').html(`<h1 class="sidebar-header" style="text-align:center; margin-bottom: 0.3em">${feature.properties.NOM} </h1>
+
+<table class="table table-hover" id="llista" >
+    <tr>
+       <p class="titolet">Intervencions Guàrdia Urbana (any 2020)<p> 
+    </tr>
+    <tr id="accidents">
+       <th>Accidents : </th>
+        <td>   <strong> ${feature.properties.Accidents} </strong> </td>
+    </tr>
+    <tr id="agressions">
+       <th>Agressions : </th>
+        <td>   <strong> ${feature.properties.Agresions} </strong> </td>
+    </tr>
+    <tr id="violencia">
+       <th>Violència domèstica : </th>
+        <td>   <strong> ${feature.properties.Domestica} </strong> </td>
+    </tr>
+    <tr id="convi">
+       <th>Convivència veïnal : </th>
+        <td>   <strong> ${feature.properties.Conv_veins} </strong> </td>
+    </tr>
+    <tr id="baralles">
+       <th>Baralles : </th>
+        <td>   <strong> ${feature.properties.Baralles} </strong> </td>
+    </tr>
+    <tr id="psico">
+       <th>Psicotròpics / Drogues : </th>
+        <td>   <strong> ${feature.properties.Psicotrop} </strong> </td>
+    </tr>
+    <tr id="alarmes">
+       <th>Alarmes : </th>
+        <td>   <strong> ${feature.properties.Alarmes} </strong> </td>
+    </tr>
+    <tr id="proteccio">
+       <th>Protecció : </th>
+        <td>   <strong> ${feature.properties.Proteccio} </strong> </td>
+    </tr>                  
+    <tr id="atemptats">
+       <th>Atemptats : </th>
+        <td>   <strong> ${feature.properties.Atemptats_} </strong> </td>
+    </tr>
+    <tr id="avariesSM">
+       <th>Avaries serveis municipals : </th>
+        <td>   <strong> ${feature.properties.Avaries_SM} </strong> </td>
+    </tr>
+    <tr id="avariesSP">
+       <th>Avaries serveis públics : </th>
+        <td>   <strong> ${feature.properties.Avaries_SP} </strong> </td>
+    </tr>
+    <tr id="conflictes">
+       <th>Conflictes : </th>
+        <td>   <strong> ${feature.properties.Conflictes} </strong> </td>
+    </tr>
+    <tr id="llibertat">
+       <th>Llibertat sexual : </th>
+        <td>   <strong> ${feature.properties.Llibertat} </strong> </td>
+    </tr>                                                         
+    <tr id="incendis">
+       <th>Incendis : </th>
+        <td>   <strong> ${feature.properties.Incendis_s} </strong> </td>
+    </tr>
+    <tr id="infraccions">
+       <th>Infraccions de trànsit: </th>
+        <td>   <strong> ${feature.properties.Infraccion} </strong> </td>
+    </tr>
+    <tr id="estaciona">
+       <th>Estacionament : </th>
+        <td>   <strong> ${feature.properties.Estacionam} </strong> </td>
+    </tr>
+    <tr id="inspeccions">
+       <th>Inspeccions : </th>
+        <td>   <strong> ${feature.properties.Inspeccion} </strong> </td>
+    </tr>
+    <tr id="manifestacions">
+       <th>Manifestacions : </th>
+        <td>   <strong> ${feature.properties.Manifestac} </strong> </td>
+    </tr>
+    <tr id="obres">
+       <th>Obres : </th>
+        <td>   <strong> ${feature.properties.Obres_sum} </strong> </td>
+    </tr>
+    <tr id="ocupacions">
+       <th>Ocupacions : </th>
+        <td>   <strong> ${feature.properties.Ocupacions} </strong> </td>
+    </tr>
+    <tr id="restriccions">
+       <th>Restriccions : </th>
+        <td>   <strong> ${feature.properties.Restriccio} </strong> </td>
+    </tr>
+    <tr id="vandalisme">
+       <th>Vandalisme : </th>
+        <td>   <strong> ${feature.properties.Vandalisme} </strong> </td>
+    </tr>
+    
+</table>
+`);
+                $('#profile').html();
+                $('#messages').html();
+
+            });
         }
 
 
